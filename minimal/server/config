@@ -1,0 +1,24 @@
+                    GNU GENERAL PUBLIC LICENSE
+                       Version 3, 29 June 2007
+
+ Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but changing it is not allowed.
+
+#                   IMPORTANT!
+# DO NOT CHANGE THE ORDER OR FORMAT OF THE CONFIG KEYS
+
+# 2 types of socket: "eth" or "inet"
+TYPE=eth
+
+# Set this to the IP address or hostname of your computer
+IP=localhost
+
+# Port can be whatever, but has to match on client side
+PORT=1234
+
+# The rate of images captured/second
+FPS=24
+
+# 3 quality types: "low" | "med" | "high"
+QUALITY=low
