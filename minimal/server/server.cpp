@@ -1,13 +1,8 @@
 /*
-                    GNU GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
-
- Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
+A copy of the license to this software is located 
+in the working directory of the repository
 */
 
-// Raw video streaming server (no encoding/decoding)
 #include "server.h"
 
 
@@ -47,37 +42,48 @@ Server::Server() {
 
     // Set configuration variables from configuration file
     for (const auto& pair : configValues) {
-        if (pair.first == "TYPE") {
-            TYPE = pair.second;
-        }
-        else if (pair.first == "IP") {
+        if (pair.first == "IP") {
             IP = pair.second;
         } 
         else if (pair.first == "PORT") {
             PORT = std::stoi(pair.second);
         }
-        else if (pair.first == "FPS") {
-            FPS = std::stoi(pair.second);
+        else if (pair.first == "BUFF_SIZE") {
+            BUFF_SIZE = stoi(pair.second);
         }
         else if (pair.first == "QUALITY") {
-            QUALITY = pair.second;
+            if (pair.first == "low" || pair.first == "med" || pair.first == "high") {
+                QUALITY = pair.second;
+            }
+            else {
+                throw std::runtime_error("[open-VSL] - Error in configuration, check config file");
+            }
         }
     }
 
     // Boot the server
-    std::cout << "Server (Boot): " << "[" << IP << " @ " << PORT << "]" << std::endl;
+    std::cout << "[open-VSL] - Booting Server: " << "[" << IP << " @ " << PORT << "]" << std::endl;
 
-    SERVER = socket(AF_INET, SOCK_STREAM, 0); // The server socket
+    SERVER = socket(AF_INET, SOCK_DGRAM, 0); // The server socket
 
     // Confirm socket was constructed cleanly
     if (SERVER == -1) {
-        throw std::runtime_error("Error creating socket");
+        throw std::runtime_error("[open-VSL] - Error in creating socket");
     }
 
     // Allow reusing the address and port
     int opt = 1;
     if (setsockopt(SERVER, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)) == -1) {
         close(SERVER);
-        throw std::runtime_error("Error setting socket options");
+        throw std::runtime_error("[open-VSL] - Error setting socket options");
     }
+
+    // Define socket address
+    ADDRESS.sin_family = AF_INET;
+    ADDRESS.sin_port = htons(PORT);
+    ADDRESS.sin_addr.s_addr = INADDR_ANY;
+
+    // Bind the socket
+    bind(SERVER, (struct sockaddr*)&ADDRESS, sizeof(ADDRESS));
+
 }

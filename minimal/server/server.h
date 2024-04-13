@@ -1,10 +1,6 @@
 /*
-                    GNU GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
-
- Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
+A copy of the license to this software is located 
+in the working directory of the repository
 */
 
 
@@ -23,25 +19,24 @@
 
 class Server {
 private:
-    static std::string TYPE;
     static std::string IP;
     static int PORT;
-    static int FPS;
+    static int BUFF_SIZE;
     static std::string QUALITY;
 
+    int SERVER; // The server socket
+    sockaddr_in ADDRESS; // Server address
     
 public:
     Server();
-    int SERVER; // The server socket
 
     // Methods that return the private variables
-    const std::string& type() const { return TYPE; }
     const std::string& ip() const { return IP; }
     const int& port() const { return PORT; }
-    const int& fps() const { return FPS; }
     const std::string& quality() const { return QUALITY; }
 
-    // 
+    // Methods for interacting with the server
+    
 };
 
 #endif // SERVER_H

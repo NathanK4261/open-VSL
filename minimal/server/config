@@ -1,15 +1,5 @@
-                    GNU GENERAL PUBLIC LICENSE
-                       Version 3, 29 June 2007
-
- Copyright (C) 2007 Free Software Foundation, Inc. <https://fsf.org/>
- Everyone is permitted to copy and distribute verbatim copies
- of this license document, but changing it is not allowed.
-
-#                   IMPORTANT!
-# DO NOT CHANGE THE ORDER OR FORMAT OF THE CONFIG KEYS
-
-# 2 types of socket: "eth" or "inet"
-TYPE=eth
+# A copy of the license to this software is located 
+# in the working directory of this repository
 
 # Set this to the IP address or hostname of your computer
 IP=localhost
@@ -17,8 +7,14 @@ IP=localhost
 # Port can be whatever, but has to match on client side
 PORT=1234
 
-# The rate of images captured/second
-FPS=24
+# Buffer size (in bytes) that limits the max ammount of data that can be sent
+BUFF_SIZE=4096
 
 # 3 quality types: "low" | "med" | "high"
+   # Low: Greyscale image + Data-saver + Image-reduction (may result in a "clurry" or "cloudy" stream)
+   # Medium: Greyscale image + Data-saver.
+   # High: Color image + Data-saver
 QUALITY=low
+
+# Interface of the camera you want to use
+CAM_INTERFACE=
