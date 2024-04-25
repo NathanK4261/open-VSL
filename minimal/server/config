@@ -11,7 +11,7 @@ PORT=1234
 BUFF_SIZE=4096
 
 # 3 quality types: "low" | "med" | "high"
-   # Low: Greyscale image + Data-saver + Image-reduction (may result in a "clurry" or "cloudy" stream)
+   # Low: Greyscale image + Data-saver + Image-reduction (may result in a "blurry" or "cloudy" stream)
    # Medium: Greyscale image + Data-saver.
    # High: Color image + Data-saver
 QUALITY=low
